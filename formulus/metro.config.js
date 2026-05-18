@@ -60,6 +60,9 @@ const config = {
   resolver: {
     unstable_enableSymlinks: true,
     unstable_enablePackageExports: true,
+    // Linked monorepo packages resolve from their realpath (outside `formulus/`),
+    // so include app-local node_modules explicitly for helper/runtime packages.
+    nodeModulesPaths: [path.resolve(projectRoot, 'node_modules')],
     extraNodeModules: extraModules,
     resolveRequest(context, moduleName, platform) {
       // @babel/runtime subpaths (workspace packages e.g. @ode/observation-query)
